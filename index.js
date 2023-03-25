@@ -15,6 +15,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
   try {
     const coursesCollection = client.db("creative-agencies").collection("courses");
+    const productsCollection = client.db("creative-agencies").collection("products");
 
     app.get('/', (req, res) => {
       res.send('Hello World from backend!')
@@ -32,6 +33,16 @@ async function run() {
       const query = { _id: new ObjectId(id) }
       const cursor = await coursesCollection.findOne(query);
       res.send(cursor);
+    })
+
+    app.post("/addProduct", async (req, res) => {
+      const { title, course_name, description, short_details, details, requirements, language, author, duration, project, price, students, picture, icon, video_link } = req.body;
+      const course = { title, course_name, description, short_details, details, requirements, language, author, duration, project, price, students, picture, icon };
+      const result = await coursesCollection.insertOne(course);
+      const insertedId = `${result.insertedId}`;
+      const product = { productId: insertedId, video_link, course_name }
+      const productAddResult = await productsCollection.insertOne(product);
+      res.send(productAddResult);
     })
 
 

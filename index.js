@@ -59,6 +59,18 @@ async function run() {
       }
     })
 
+    app.get("/users", async (req, res) => {
+      const query = {};
+      const cursor = userCollection.find(query);
+      const result = await cursor.toArray();
+      const oldUser = [];
+      result.forEach(e => {
+        if (e.role !== "admin") {
+          oldUser.push(e.email);
+        }
+      })
+      res.send(oldUser);
+    })
 
 
 

@@ -16,6 +16,7 @@ async function run() {
   try {
     const coursesCollection = client.db("creative-agencies").collection("courses");
     const productsCollection = client.db("creative-agencies").collection("products");
+    const userCollection = client.db("creative-agencies").collection("user");
 
     app.get('/', (req, res) => {
       res.send('Hello World from backend!')
@@ -43,6 +44,19 @@ async function run() {
       const product = { productId: insertedId, video_link, course_name }
       const productAddResult = await productsCollection.insertOne(product);
       res.send(productAddResult);
+    })
+
+    app.post("/addUser", async (req, res) => {
+      const data = req.body;
+      const query = { email: data.email };
+      const userExist = await userCollection.findOne(query);
+      if (!userExist) {
+        const addUser = await userCollection.insertOne(data);
+        res.send(addUser);
+      }
+      else {
+        res.send("user already exists")
+      }
     })
 
 

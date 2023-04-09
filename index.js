@@ -72,6 +72,17 @@ async function run() {
       res.send(oldUser);
     })
 
+    app.get("/isAdmin", async (req, res) => {
+      const query = req.query;
+      const result = await userCollection.findOne(query);
+      if (result.role === "admin") {
+        res.send(true);
+      }
+      else {
+        res.send(false);
+      }
+    })
+
     app.patch("/makeAdmin", async (req, res) => {
       const filter = req.body;
       const updateDoc = {

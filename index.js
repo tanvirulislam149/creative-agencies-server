@@ -72,6 +72,17 @@ async function run() {
       res.send(oldUser);
     })
 
+    app.patch("/makeAdmin", async (req, res) => {
+      const filter = req.body;
+      const updateDoc = {
+        $set: {
+          role: "admin"
+        }
+      }
+      const result = await userCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    })
+
 
 
 

@@ -29,3 +29,17 @@ exports.getUsers = async (req, res, next) => {
     res.status(500).send({ message: error.message })
   }
 }
+
+exports.makeAdmin = async (req, res, next) => {
+  try {
+    const updateDoc = {
+      $set: {
+        role: "admin"
+      }
+    }
+    const result = await User.updateOne(req.body, updateDoc);
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}

@@ -14,3 +14,18 @@ exports.addUser = async (req, res, next) => {
     res.status(500).send({ message: error.message });
   }
 }
+
+exports.getUsers = async (req, res, next) => {
+  try {
+    const result = await User.find({});
+    let oldUser = [];
+    result.forEach(e => {
+      if (e.role !== "admin") {
+        oldUser.push(e.email);
+      }
+    })
+    res.send(oldUser);
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}

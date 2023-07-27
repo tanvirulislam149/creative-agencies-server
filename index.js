@@ -134,7 +134,7 @@ async function main() {
 
 main();
 
-app.use("/", coursesRoute)
+app.use("/course", coursesRoute)
 
 app.get('/', (req, res) => {
   res.send('Hello World from mongoose!')

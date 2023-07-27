@@ -43,3 +43,18 @@ exports.makeAdmin = async (req, res, next) => {
     res.status(500).send({ message: error.message });
   }
 }
+
+exports.isAdmin = async (req, res, next) => {
+  try {
+    const query = User.where(req.query);
+    const result = await query.findOne();
+    if (result.role === "admin") {
+      res.send(true);
+    }
+    else {
+      res.send(false);
+    }
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}

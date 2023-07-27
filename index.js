@@ -40,6 +40,11 @@
 //       res.send(result);
 //     })
 
+
+
+
+
+
 //     app.post("/addUser", async (req, res) => {
 //       const data = req.body;
 //       const query = { email: data.email };
@@ -115,7 +120,8 @@ var cors = require('cors')
 require('dotenv').config()
 const app = express();
 const PORT = process.env.PORT || 5000;
-const coursesRoute = require("./src/app/modules/courses/courses.route")
+const coursesRoute = require("./src/app/modules/courses/courses.route");
+const userRoute = require("./src/app/modules/user/user.route");
 
 
 // middleware
@@ -134,7 +140,9 @@ async function main() {
 
 main();
 
+// Routes
 app.use("/course", coursesRoute)
+app.use("/user", userRoute);
 
 app.get('/', (req, res) => {
   res.send('Hello World from mongoose!')

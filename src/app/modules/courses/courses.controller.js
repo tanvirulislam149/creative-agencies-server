@@ -12,7 +12,7 @@ exports.getCoursesController = async (req, res, next) => {
 exports.addCourseController = async (req, res, next) => {
   try {
     const result = await Courses.create(req.body);
-    console.log(data);
+    // console.log(data);
     res.send(result);
   } catch (error) {
     res.status(500).send({ message: error.message });

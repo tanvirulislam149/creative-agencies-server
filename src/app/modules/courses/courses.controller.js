@@ -22,7 +22,6 @@ exports.addCourseController = async (req, res, next) => {
 exports.getCourseNameController = async (req, res, next) => {
   try {
     const result = await Courses.find({}).select("title");
-    console.log(result);
     res.send(result);
   } catch (error) {
     res.status(500).send({ message: error.message })

@@ -41,6 +41,14 @@ const OrderSchema = new mongoose.Schema({
       values: ['pending', 'onGoing', 'done'],
       message: '{VALUE} is not supported'
     }
+  },
+  serviceImg: {
+    type: String,
+    required: true
+  },
+  serviceDescription: {
+    type: String,
+    required: true
   }
 })
 

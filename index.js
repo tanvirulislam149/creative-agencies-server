@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000;
 const coursesRoute = require("./src/app/modules/courses/courses.route");
 const userRoute = require("./src/app/modules/user/user.route");
 const orderRoute = require("./src/app/modules/Orders/order.route")
+const reviewsRoute = require("./src/app/modules/Reviews/reviews.route")
 
 
 // middleware
@@ -29,6 +30,7 @@ main();
 app.use("/course", coursesRoute)
 app.use("/user", userRoute);
 app.use("/order", orderRoute);
+app.use("/reviews", reviewsRoute);
 
 
 // testing...

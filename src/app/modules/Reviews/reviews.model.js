@@ -12,6 +12,10 @@ const ReviewsSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true
+  },
+  reviewerImg: {
+    type: String,
+    required: true
   }
 })
 

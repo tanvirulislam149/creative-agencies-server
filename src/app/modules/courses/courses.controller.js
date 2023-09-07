@@ -27,3 +27,14 @@ exports.getCourseNameController = async (req, res, next) => {
     res.status(500).send({ message: error.message })
   }
 }
+
+
+exports.deleteCourseController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await Courses.deleteOne({ _id: id });
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: error.message })
+  }
+}
